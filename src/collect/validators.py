@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-VALIDATORS_CSV = os.path.join(PROJECT_ROOT, "data", "raw", "validators", "polygon_validators_2024_2025.csv")
+VALIDATORS_CSV = os.path.join(PROJECT_ROOT, "data", "raw", "validators", "polygon_validators.csv")
 
 def load_validators() -> pd.DataFrame:
   """
