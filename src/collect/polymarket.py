@@ -15,6 +15,9 @@ def _fetch_price_history(token_id: str) -> pd.DataFrame:
   """
   Fetch price history for a Yes token from the Polymarket CLOB API.
   Returns a dataframe with columns: timestamp, price.
+
+  Note: Used for pre-resolution Kalshi spread calculation only.
+  For convergence speed, use src.signals.efficienxy._fetch_trades() instead.
   """
   r = requests.get(
     "https://clob.polymarket.com/prices-history",
