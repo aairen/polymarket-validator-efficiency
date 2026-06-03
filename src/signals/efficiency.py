@@ -48,6 +48,7 @@ def _fetch_trades(condition_id: str) -> pd.DataFrame:
   df = pd.DataFrame([t for t in all_trades if isinstance(t, dict) and 'timestamp' in t])
   df = df[df['outcome'] == 'Yes'].copy()
   df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s', utc=True)
+  df['price'] = df['price'].astype(float)
   df = df[['timestamp', 'price']].sort_values('timestamp').reset_index(drop=True)
 
   return df
