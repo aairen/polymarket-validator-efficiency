@@ -21,8 +21,8 @@ def _fetch_candlesticks(ticker: str) -> pd.DataFrame:
   r = requests.get(
     f"{BASE_URL}/historical/markets/{ticker}/candlesticks",
     params={
-      "start_ts": 1700000000, # Jan 2024
-      "end_ts": 1769922000,  # Feb 2026
+      "start_ts": 1704067200, # Jan 1 2024
+      "end_ts": 1772323200,  # Mar 1 2026
       "period_interval": 1440, # daily candles
     }
   ).json()

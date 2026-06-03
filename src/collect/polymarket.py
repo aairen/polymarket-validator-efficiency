@@ -17,7 +17,7 @@ def _fetch_price_history(token_id: str) -> pd.DataFrame:
   Returns a dataframe with columns: timestamp, price.
 
   Note: Used for pre-resolution Kalshi spread calculation only.
-  For convergence speed, use src.signals.efficienxy._fetch_trades() instead.
+  For convergence speed, use src.signals.efficiency._fetch_trades() instead.
   """
   r = requests.get(
     "https://clob.polymarket.com/prices-history",

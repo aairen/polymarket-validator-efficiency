@@ -66,7 +66,7 @@ def convergence_speed(trades: pd.DataFrame, resolved_value: float,
     window_hours: hours post-resolution to measure
 
   Returns:
-    float - mean absolution deviation from resolved value
+    float - mean absolute deviation from resolved value
   """
   window_end = resolution_time + pd.Timedelta(hours=window_hours)
   post = trades[
@@ -100,8 +100,8 @@ def kalshi_spread(event_name: str, resolution_time: pd.Timestamp, window_days: i
   from src.collect.polymarket import get_price_history as pm_get
   from src.collect.kalshi import get_price_history as kal_get
 
-  pm_df = pd.DataFrame(pm_get(event_name))
-  kal_df = pd.DataFrame(kal_get(event_name))
+  pm_df = pm_get(event_name)
+  kal_df = kal_get(event_name)
   
   window_start = resolution_time - pd.Timedelta(days=window_days)
 
@@ -138,7 +138,10 @@ def compute_event_metrics(event_name: str) -> dict:
   from src.signals.decentralization import load_metrics as load_dec
 
   events = load_events()
-  row = events[events['event_name'] == event_name].iloc[0]
+  match = events[events['event_name'] == event_name]
+  if match.empty:
+    raise ValueError(f"Event '{event_name}' not found in events.csv")
+  row = match.iloc[0]
   condition_id = str(row['condition_id'])
   resolved_value = int(row['resolved_value'])
   resolution_ts = int(row['resolution_ts'])
